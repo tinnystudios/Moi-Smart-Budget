@@ -114,6 +114,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 [Serializable]
 public class BudgetModel
 {
+    public int Id;
     public string Name = "Budget Model";
     public float Amount = 100;
     public List<ExpenseModel> Expenses = new List<ExpenseModel>();
@@ -146,6 +147,8 @@ public class ExpenseModel
 {
     public string Name;
     public float Cost;
+    public int BudgetId;
+
     public DateTime PurchaseDate = DateTime.Now;
 
     public ExpenseModel() { }
