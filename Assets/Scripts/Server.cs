@@ -35,16 +35,19 @@ public class Server : MonoBehaviour
     {
         var url = "http://192.168.1.85/GetExpenses.php";
         yield return RestService.Get(url, ExpensesResponse);
+        RefreshBudgetExpenseList();
     }
 
     public IEnumerator GetBudgets()
     {
         var url = "http://192.168.1.85/GetBudgets.php";
         yield return RestService.Get(url, BudgetsResponse);
+        RefreshBudgetExpenseList();
+    }
 
+    public void RefreshBudgetExpenseList()
+    {
         foreach (var budget in BudgetsResponse.Result)
-        {
             budget.Expenses = ExpensesResponse.Result.Where(x => x.BudgetId == budget.Id).ToList();
-        }
     }
 }
