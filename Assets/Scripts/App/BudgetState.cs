@@ -5,7 +5,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine;
 
-public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<AddExpenseState>, ICreateState, IDataBind<DialogueBox>, , IDataBind<Server>, IDataBind<Spinner>
+public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<AddExpenseState>, ICreateState, IDataBind<DialogueBox>, IDataBind<Server>, IDataBind<Spinner>
 {
     public BudgetModel BudgetModel;
 
@@ -62,17 +62,17 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         RefreshUI();
     }
 
-    public void SaveChanges()
+    public Coroutine SaveChanges()
     {
         if (_server.Running)
-            return;
+            return null;
 
-        StartCoroutine(Routine());
+        return StartCoroutine(Routine());
 
         IEnumerator Routine()
         {
             _spinner.Begin();
-            yield return _server.Update(BudgetModel);
+            yield return _server.UpdateBudget(BudgetModel);
             _spinner.End();
         }
     }
@@ -95,6 +95,12 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         }
 
         return base.TransitionIn(state);
+    }
+
+    public override IEnumerator TransitionOut(State state)
+    {
+        yield return SaveChanges();
+        yield return base.TransitionOut(state);
     }
 
     public void RefreshUI()

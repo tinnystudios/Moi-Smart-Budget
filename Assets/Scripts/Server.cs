@@ -61,9 +61,9 @@ public class Server : MonoBehaviour
         RefreshBudgetExpenseList();
     }
 
-    public IEnumerator Update(BudgetModel budgetModel)
+    public IEnumerator UpdateBudget(BudgetModel budgetModel)
     {
-        yield return RestService.Get(GetApiUrl(ServerPaths.GetBudgets), BudgetsResponse);
+        yield return RestService.Post(GetApiUrl(ServerPaths.UpdateBudget), budgetModel);
     }
 
     public void RefreshBudgetExpenseList()
