@@ -7,9 +7,15 @@ $dbname = "homedb";
 
 $testVariable = $_POST["jsonObject"];
 $obj = json_decode($testVariable);
+
+$Id = $obj->Id;
+
+// Updatable values
 $Name = $obj->Name;
 $Amount = $obj->Amount;
-$Id = $obj->Id;
+$StartDate = $obj->StartDate;
+$EndDate = $obj->EndDate;
+$Repeat = $obj->Repeat;
 
 settype($Id, "integer"); 
 
@@ -20,7 +26,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE budgets SET Amount='".$Amount."' WHERE id='".$Id."'";
+$sql = "UPDATE budgets SET Amount='".$Amount."', Name = '"$Name"', StartDate = '"$StartDate"', EndDate = '"$EndDate"', Repeat = '"$Repeat"' WHERE id='".$Id."'";
 
 if ($conn->query($sql) === TRUE) {
     echo "Successfully updated budget";

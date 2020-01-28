@@ -13,6 +13,8 @@ $obj = json_decode($testVariable);
 $Name = $obj->Name;
 $BudgetId = $obj->BudgetId;
 $Cost = $obj->Cost;
+$PurchaseDate = $obj->PurchaseDate;
+$UserId = $obj->UserId;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -22,7 +24,7 @@ if ($conn->connect_error) {
 }
 
 $sql = "INSERT INTO expenses (name, budgetId, cost)
-VALUES ('".$Name."', '".$BudgetId."', '".$Cost."')";
+VALUES ('".$Name."', '".$BudgetId."', '".$Cost."', '".$PurchaseDate."', '".$UserId."')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

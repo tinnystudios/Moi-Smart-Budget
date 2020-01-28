@@ -19,7 +19,7 @@ $list = array();
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-		$list[] = array('id' => $row["id"], 'name' => $row["name"], 'amount' => $row["amount"]);
+		$list[] = array('id' => $row["id"], 'name' => $row["name"], 'amount' => $row["amount"], 'startTime' => $row["startTime"], 'endTime' => $row["endTime"], 'repeat' => $row["repeat"]);
     }
 } else {
     echo "0 results";
