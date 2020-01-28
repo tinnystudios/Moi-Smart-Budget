@@ -2,14 +2,29 @@
 using System.Linq;
 using UnityEngine;
 
+public class ServerPaths
+{
+    public const string GetExpenses = "GetExpenses.php";
+    public const string AddExpenses = "AddExpenses.php";
+    public const string GetBudgets = "GetBudgets.php";
+    public const string AddBudgets = "AddBudgets.php";
+}
+
 public class Server : MonoBehaviour
 {
+    public const string HostName = "http://moi.holepunch.io";
+
     public RestService RestService = new RestService();
     public ExpenseResponse ExpensesResponse;
     public BudgetResponse BudgetsResponse;
 
+    public bool AutoStart = false;
+
     private IEnumerator Start()
     {
+        if (!AutoStart)
+            yield break;
+
         // yield return PostExpense();
         //yield return PostBudget(new BudgetModel { Name = "EatOut", Amount = 100 });
 
@@ -17,31 +32,31 @@ public class Server : MonoBehaviour
         yield return GetBudgets();
     }
 
+    public IEnumerator UpdateDataContext()
+    {
+        yield return GetExpenses();
+        yield return GetBudgets();
+    }
+
     public IEnumerator PostExpense(ExpenseModel expense)
     {
-        var url = "http://192.168.1.85/AddExpenses.php";
-        var formData = new WWWForm();
-        yield return RestService.Post(url, expense);
+        yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
     }
 
     public IEnumerator PostBudget(BudgetModel budget)
     {
-        var url = "http://192.168.1.85/AddBudgets.php";
-        var formData = new WWWForm();
-        yield return RestService.Post(url, budget);
+        yield return RestService.Post(GetApiUrl(ServerPaths.AddBudgets), budget);
     }
 
     public IEnumerator GetExpenses()
     {
-        var url = "http://192.168.1.85/GetExpenses.php";
-        yield return RestService.Get(url, ExpensesResponse);
+        yield return RestService.Get(GetApiUrl(ServerPaths.GetExpenses), ExpensesResponse);
         RefreshBudgetExpenseList();
     }
 
     public IEnumerator GetBudgets()
     {
-        var url = "http://192.168.1.85/GetBudgets.php";
-        yield return RestService.Get(url, BudgetsResponse);
+        yield return RestService.Get(GetApiUrl(ServerPaths.GetBudgets), BudgetsResponse);
         RefreshBudgetExpenseList();
     }
 
@@ -49,5 +64,10 @@ public class Server : MonoBehaviour
     {
         foreach (var budget in BudgetsResponse.Result)
             budget.Expenses = ExpensesResponse.Result.Where(x => x.BudgetId == budget.Id).ToList();
+    }
+
+    public string GetApiUrl(string api, params string[] parameters)
+    {
+        return $"{HostName}/{api}";
     }
 }

@@ -19,6 +19,11 @@ public class AccountController : MonoBehaviour, IDataBind<StateMachine>
         Load(ref BudgetHistory, _historyFileName);
     }
 
+    public void Load(List<BudgetModel> budgetModels)
+    {
+        Budgets = budgetModels;
+    }
+
     public void Load(ref List<BudgetModel> model, string fileName)
     {
         var path = Application.persistentDataPath;
