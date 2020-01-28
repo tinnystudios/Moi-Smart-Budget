@@ -18,7 +18,6 @@ public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateSt
     {
         base.Setup();
         RepeatDropDown.ClearOptions();
-
         var options = Enum.GetNames(typeof(ERepeatType)).ToList();
         RepeatDropDown.AddOptions(options);
         RepeatDropDown.RefreshShownValue();

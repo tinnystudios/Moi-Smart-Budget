@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Model:
+    Id: 0
     Name: Budget Model
     Amount: 100
     Expenses: []
+    Repeat: 0
   Label: {fileID: 2549576370440600041}
 --- !u!1001 &7343261194205640335
 PrefabInstance:
@@ -133,6 +135,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175098509395868540, guid: 07eed8239189d98429417f86b4b8505b,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175098509395868540, guid: 07eed8239189d98429417f86b4b8505b,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175098509395868540, guid: 07eed8239189d98429417f86b4b8505b,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.18039216
       objectReference: {fileID: 0}
     - target: {fileID: 8165490778250492011, guid: 07eed8239189d98429417f86b4b8505b,
         type: 3}

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<AddExpenseState>, ICreateState, IDataBind<DialogueBox>
 {
@@ -17,10 +16,9 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     public TMP_InputField BudgetInputField;
     public TMP_InputField EndInputField;
-
     public TextMeshProUGUI RemainingLabel;
-
     public TextMeshProUGUI SpentLabel;
+    public TMP_Dropdown RepeatDropDown;
 
     private AccountController _accountController;
     private AddExpenseState _expenseState;
@@ -32,6 +30,18 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         BudgetInputField.onValueChanged.AddListener(OnBudgetValueChanged);
         EndInputField.onSubmit.AddListener(OnEndDateSubmit);
         EndInputField.onSelect.AddListener(OnEndInputSelected);
+
+        RepeatDropDown.ClearOptions();
+        var options = Enum.GetNames(typeof(ERepeatType)).ToList();
+        RepeatDropDown.AddOptions(options);
+        RepeatDropDown.RefreshShownValue();
+        RepeatDropDown.onValueChanged.AddListener(OnRepeatChanged);
+    }
+
+    private void OnRepeatChanged(int value)
+    {
+        BudgetModel.Repeat = (ERepeatType)value;
+        _accountController.Save();
     }
 
     private void OnEndInputSelected(string text)
@@ -85,6 +95,8 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         EndInputField.text = $"In {BudgetModel.RemainingDisplayDays} days";
 
         SpentLabel.text = $"${sum}";
+
+        RepeatDropDown.SetValueWithoutNotify((int)BudgetModel.Repeat);
     }
 
     public void Bind(AccountController data)
