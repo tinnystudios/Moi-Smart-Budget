@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 using UnityEngine;
@@ -40,6 +39,32 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         RepeatDropDown.onValueChanged.AddListener(OnRepeatChanged);
     }
 
+    public override IEnumerator TransitionIn(State state)
+    {
+        if (BudgetModel.RemainingDays <= 0 && BudgetModel.Repeat != ERepeatType.Once)
+            _accountController.NewBudgetCycle(BudgetModel);
+
+        RefreshUI();
+
+        var list = Container.GetComponentsInChildren<ExpenseButton>(includeInactive: true);
+        foreach (var button in list.Reverse())
+            Destroy(button.gameObject);
+
+        foreach (var expense in BudgetModel.Expenses)
+        {
+            var expenseButton = Instantiate(ExpenseButtonPrefab, Container);
+            expenseButton.Initialize(expense);
+        }
+
+        return base.TransitionIn(state);
+    }
+
+    public override IEnumerator TransitionOut(State state)
+    {
+        yield return SaveChanges();
+        yield return base.TransitionOut(state);
+    }
+
     private void OnRepeatChanged(int value)
     {
         BudgetModel.Repeat = (ERepeatType)value;
@@ -75,32 +100,6 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
             yield return _server.UpdateBudget(BudgetModel);
             _spinner.End();
         }
-    }
-
-    public override IEnumerator TransitionIn(State state)
-    {
-        if (BudgetModel.RemainingDays <= 0 && BudgetModel.Repeat != ERepeatType.Once)
-            _accountController.NewBudgetCycle(BudgetModel);
-
-        RefreshUI();
-
-        var list = Container.GetComponentsInChildren<ExpenseButton>(includeInactive: true);
-        foreach (var button in list.Reverse())
-            Destroy(button.gameObject);
-
-        foreach (var expense in BudgetModel.Expenses)
-        {
-            var expenseButton = Instantiate(ExpenseButtonPrefab, Container);
-            expenseButton.Initialize(expense);
-        }
-
-        return base.TransitionIn(state);
-    }
-
-    public override IEnumerator TransitionOut(State state)
-    {
-        yield return SaveChanges();
-        yield return base.TransitionOut(state);
     }
 
     public void RefreshUI()
@@ -148,66 +147,8 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         }
     }
 
-    public void Bind(AddExpenseState data)
-    {
-        _expenseState = data;
-    }
-
-    public void Bind(DialogueBox data)
-    {
-        _dialogueBox = data;
-    }
-
-    public void Bind(Server data)
-    {
-        _server = data;
-    }
-
-    public void Bind(Spinner data)
-    {
-        _spinner = data;
-    }
-}
-
-[Serializable]
-public class BudgetModel
-{
-    public int Id;
-    public string Name = "Budget Model";
-    public float Amount = 100;
-    public List<ExpenseModel> Expenses = new List<ExpenseModel>();
-
-    public DateTime StartTime;
-    public DateTime EndTime;
-    public ERepeatType Repeat;
-
-    public double RemainingDays => (EndTime - DateTime.Now).TotalDays;
-    public int RemainingDisplayDays => (int)RemainingDays;
-
-    public static Dictionary<ERepeatType, int> RepeatDaysLookUp = new Dictionary<ERepeatType, int>
-    {
-        {ERepeatType.Weekly, 7},
-        {ERepeatType.Fortnightly, 14},
-        {ERepeatType.Monthly, 28},
-        {ERepeatType.Yearly, 365},
-    };
-
-    public void NewCycle()
-    {
-        StartTime = EndTime;
-        EndTime = StartTime.Add(TimeSpan.FromDays(RepeatDaysLookUp[Repeat]));
-    }
-}
-
-
-[Serializable]
-public class ExpenseModel
-{
-    public string Name;
-    public float Cost;
-    public int BudgetId;
-
-    public DateTime PurchaseDate = DateTime.Now;
-
-    public ExpenseModel() { }
+    public void Bind(AddExpenseState data) => _expenseState = data;
+    public void Bind(DialogueBox data) => _dialogueBox = data;
+    public void Bind(Server data) => _server = data;
+    public void Bind(Spinner data) => _spinner = data;
 }
