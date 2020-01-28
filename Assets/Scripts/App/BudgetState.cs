@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<AddExpenseState>, ICreateState, IDataBind<DialogueBox>
 {
@@ -15,8 +16,10 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     public TextMeshProUGUI TitleLabel;
 
     public TMP_InputField BudgetInputField;
+    public TMP_InputField EndInputField;
+
     public TextMeshProUGUI RemainingLabel;
-    public TextMeshProUGUI EndLabel;
+
     public TextMeshProUGUI SpentLabel;
 
     private AccountController _accountController;
@@ -27,6 +30,20 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     {
         base.Setup();
         BudgetInputField.onValueChanged.AddListener(OnBudgetValueChanged);
+        EndInputField.onSubmit.AddListener(OnEndDateSubmit);
+        EndInputField.onSelect.AddListener(OnEndInputSelected);
+    }
+
+    private void OnEndInputSelected(string text)
+    {
+        EndInputField.text = BudgetModel.EndTime.ToShortDateString();
+    }
+
+    private void OnEndDateSubmit(string text)
+    {
+        BudgetModel.EndTime = DateTime.Parse(text);
+        _accountController.Save();
+        RefreshUI();
     }
 
     private void OnBudgetValueChanged(string text)
@@ -65,7 +82,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         var sum = expenses.Sum(x => x.Cost);
 
         RemainingLabel.text = $"${BudgetModel.Amount - sum}";
-        EndLabel.text = $"In {BudgetModel.RemainingDisplayDays} days";
+        EndInputField.text = $"In {BudgetModel.RemainingDisplayDays} days";
 
         SpentLabel.text = $"${sum}";
     }
