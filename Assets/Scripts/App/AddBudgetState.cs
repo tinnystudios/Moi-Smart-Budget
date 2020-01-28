@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 
-public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateState
+public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateState, IDataBind<Server>, IDataBind<Spinner>
 {
     public TMP_InputField NameInput;
     public TMP_InputField BudgetInput;
@@ -13,6 +13,8 @@ public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateSt
     public TMP_Dropdown RepeatDropDown;
 
     private AccountController _accountController;
+    private Server _server;
+    private Spinner _spinner;
 
     public override void Setup()
     {
@@ -38,23 +40,40 @@ public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateSt
 
     public void Submit()
     {
-        var endTime = DateTime.Now;
-        var startTime = DateTime.Parse(StartDateInput.text);
-        var repeatType = (ERepeatType)RepeatDropDown.value;
-
-        if (repeatType != ERepeatType.Once)
-            endTime = startTime.Add(TimeSpan.FromDays(BudgetModel.RepeatDaysLookUp[repeatType]));
-
-        var budget = new BudgetModel
+        IEnumerator Routine()
         {
-            Name = NameInput.text,
-            Amount = float.Parse(BudgetInput.text),
-            StartTime = startTime,
-            Repeat = repeatType,
-            EndTime = endTime,
-        };
+            var endTime = DateTime.Now;
+            var startTime = DateTime.Parse(StartDateInput.text);
+            var repeatType = (ERepeatType)RepeatDropDown.value;
 
-        _accountController.Add(budget);
-        StateMachine.Back();
+            if (repeatType != ERepeatType.Once)
+                endTime = startTime.Add(TimeSpan.FromDays(BudgetModel.RepeatDaysLookUp[repeatType]));
+
+            var budget = new BudgetModel
+            {
+                Name = NameInput.text,
+                Amount = float.Parse(BudgetInput.text),
+                StartTime = startTime,
+                Repeat = repeatType,
+                EndTime = endTime,
+            };
+
+            _spinner.Begin();
+            yield return _server.PostBudget(budget);
+            _spinner.End();
+
+            _accountController.Add(budget);
+            StateMachine.Back();
+        }
+    }
+
+    public void Bind(Server data)
+    {
+        _server = data;
+    }
+
+    public void Bind(Spinner data)
+    {
+        _spinner = data;
     }
 }

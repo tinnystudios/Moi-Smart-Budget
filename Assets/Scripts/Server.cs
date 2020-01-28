@@ -37,14 +37,9 @@ public class Server : MonoBehaviour
         yield return GetBudgets();
     }
 
-    public Coroutine PostExpense(ExpenseModel expense)
+    public IEnumerator PostExpense(ExpenseModel expense)
     {
-        return StartCoroutine(Routine());
-
-        IEnumerator Routine()
-        {
-            yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
-        }
+        yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
     }
 
     public IEnumerator PostBudget(BudgetModel budget)
