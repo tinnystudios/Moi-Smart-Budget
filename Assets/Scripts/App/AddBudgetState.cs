@@ -40,6 +40,11 @@ public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateSt
 
     public void Submit()
     {
+        if (_server.Running)
+            return;
+
+        StartCoroutine(Routine());
+
         IEnumerator Routine()
         {
             var endTime = DateTime.Now;

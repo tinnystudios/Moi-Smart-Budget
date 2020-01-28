@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class ServerPaths
     public const string AddExpenses = "AddExpenses.php";
     public const string GetBudgets = "GetBudgets.php";
     public const string AddBudgets = "AddBudgets.php";
+    public const string UpdateBudget = "UpdateBudgets.php";
 }
 
 public class Server : MonoBehaviour
@@ -57,6 +59,11 @@ public class Server : MonoBehaviour
     {
         yield return RestService.Get(GetApiUrl(ServerPaths.GetBudgets), BudgetsResponse);
         RefreshBudgetExpenseList();
+    }
+
+    public IEnumerator Update(BudgetModel budgetModel)
+    {
+        yield return RestService.Get(GetApiUrl(ServerPaths.GetBudgets), BudgetsResponse);
     }
 
     public void RefreshBudgetExpenseList()

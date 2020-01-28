@@ -5,7 +5,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine;
 
-public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<AddExpenseState>, ICreateState, IDataBind<DialogueBox>
+public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<AddExpenseState>, ICreateState, IDataBind<DialogueBox>, , IDataBind<Server>, IDataBind<Spinner>
 {
     public BudgetModel BudgetModel;
 
@@ -23,6 +23,8 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     private AccountController _accountController;
     private AddExpenseState _expenseState;
     private DialogueBox _dialogueBox;
+    private Server _server;
+    private Spinner _spinner;
 
     public override void Setup()
     {
@@ -58,6 +60,21 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     {
         BudgetModel.Amount = float.Parse(text);
         RefreshUI();
+    }
+
+    public void SaveChanges()
+    {
+        if (_server.Running)
+            return;
+
+        StartCoroutine(Routine());
+
+        IEnumerator Routine()
+        {
+            _spinner.Begin();
+            yield return _server.Update(BudgetModel);
+            _spinner.End();
+        }
     }
 
     public override IEnumerator TransitionIn(State state)
@@ -123,7 +140,6 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
             StateMachine.Back();
             _dialogueBox.OnConfirm -= ActuallyDelete;
         }
-        
     }
 
     public void Bind(AddExpenseState data)
@@ -134,6 +150,16 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     public void Bind(DialogueBox data)
     {
         _dialogueBox = data;
+    }
+
+    public void Bind(Server data)
+    {
+        _server = data;
+    }
+
+    public void Bind(Spinner data)
+    {
+        _spinner = data;
     }
 }
 
