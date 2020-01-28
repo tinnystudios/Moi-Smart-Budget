@@ -20,13 +20,12 @@ public class Server : MonoBehaviour
 
     public bool AutoStart = false;
 
+    public bool Running => RestService.Running;
+
     private IEnumerator Start()
     {
         if (!AutoStart)
             yield break;
-
-        // yield return PostExpense();
-        //yield return PostBudget(new BudgetModel { Name = "EatOut", Amount = 100 });
 
         yield return GetExpenses();
         yield return GetBudgets();
@@ -38,9 +37,14 @@ public class Server : MonoBehaviour
         yield return GetBudgets();
     }
 
-    public IEnumerator PostExpense(ExpenseModel expense)
+    public Coroutine PostExpense(ExpenseModel expense)
     {
-        yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
+        return StartCoroutine(Routine());
+
+        IEnumerator Routine()
+        {
+            yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
+        }
     }
 
     public IEnumerator PostBudget(BudgetModel budget)

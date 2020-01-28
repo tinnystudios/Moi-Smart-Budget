@@ -13,47 +13,9 @@ public class AccountController : MonoBehaviour, IDataBind<StateMachine>
 
     private StateMachine _stateMachine;
 
-    public void Load()
-    {
-        Load(ref Budgets, _fileName);
-        Load(ref BudgetHistory, _historyFileName);
-    }
-
     public void Load(List<BudgetModel> budgetModels)
     {
         Budgets = budgetModels;
-    }
-
-    public void Load(ref List<BudgetModel> model, string fileName)
-    {
-        var path = Application.persistentDataPath;
-        var fullPath = $"{path}/{fileName}";
-
-        if (!File.Exists(fullPath))
-        {
-            model.Clear();
-            Save(ref model, fileName);
-        }
-
-        var json = File.ReadAllText(fullPath);
-        model = JsonConvert.DeserializeObject<List<BudgetModel>>(json);
-    }
-
-    public void Save()
-    {
-        Save(ref Budgets, _fileName);
-    }
-
-    public void Save(ref List<BudgetModel> model, string fileName)
-    {
-        var path = Application.persistentDataPath;
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
-
-        var fullPath = $"{path}/{fileName}";
-        var json = JsonConvert.SerializeObject(model, Formatting.Indented);
-
-        File.WriteAllText(fullPath, json);
     }
 
     public void NewBudgetCycle(BudgetModel budgetModel)
@@ -62,13 +24,11 @@ public class AccountController : MonoBehaviour, IDataBind<StateMachine>
 
         budgetModel.Expenses.Clear();
         budgetModel.NewCycle();
-        Save();
     }
 
     public void AddHistory(BudgetModel budgetModel)
     {
         BudgetHistory.Add(budgetModel);
-        Save(ref BudgetHistory, _historyFileName);
     }
 
     public void Add(BudgetModel budget)
@@ -89,7 +49,7 @@ public class AccountController : MonoBehaviour, IDataBind<StateMachine>
         {
             if (state is ICreateState)
             {
-                Save();
+
             }
         };
     }

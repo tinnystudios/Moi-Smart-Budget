@@ -6,8 +6,12 @@ using UnityEngine.Networking;
 
 public class RestService
 {
+    public bool Running { get; private set; }
+
     public IEnumerator Post(string url, object obj)
     {
+        Running = true;
+
         var formData = new WWWForm();
         formData.AddField("jsonObject", JsonConvert.SerializeObject(obj));
 
@@ -20,6 +24,8 @@ public class RestService
             Debug.LogError(www.error);
 
         Debug.Log(www.downloadHandler.text);
+
+        Running = false;
     }
 
     public IEnumerator Get<T>(string url, Response<T> obj, Action<string> OnError = null)
@@ -29,6 +35,8 @@ public class RestService
 
     public IEnumerator Get<T>(string url, Action<T> OnSuccess, Action<string> OnError = null)
     {
+        Running = true;
+
         var www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
@@ -41,5 +49,7 @@ public class RestService
             var obj = JsonConvert.DeserializeObject<T>(www.downloadHandler.text);
             OnSuccess?.Invoke(obj);
         }
+
+        Running = false;
     }
 }

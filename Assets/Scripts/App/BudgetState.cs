@@ -41,7 +41,6 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     private void OnRepeatChanged(int value)
     {
         BudgetModel.Repeat = (ERepeatType)value;
-        _accountController.Save();
     }
 
     private void OnEndInputSelected(string text)
@@ -52,14 +51,12 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     private void OnEndDateSubmit(string text)
     {
         BudgetModel.EndTime = DateTime.Parse(text);
-        _accountController.Save();
         RefreshUI();
     }
 
     private void OnBudgetValueChanged(string text)
     {
         BudgetModel.Amount = float.Parse(text);
-        _accountController.Save();
         RefreshUI();
     }
 
