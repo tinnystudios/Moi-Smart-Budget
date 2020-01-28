@@ -15,9 +15,10 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     public TextMeshProUGUI TitleLabel;
 
     public TMP_InputField BudgetInputField;
+    public TMP_InputField EndInputField;
     public TextMeshProUGUI RemainingLabel;
-    public TextMeshProUGUI EndLabel;
     public TextMeshProUGUI SpentLabel;
+    public TMP_Dropdown RepeatDropDown;
 
     private AccountController _accountController;
     private AddExpenseState _expenseState;
@@ -27,6 +28,32 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     {
         base.Setup();
         BudgetInputField.onValueChanged.AddListener(OnBudgetValueChanged);
+        EndInputField.onSubmit.AddListener(OnEndDateSubmit);
+        EndInputField.onSelect.AddListener(OnEndInputSelected);
+
+        RepeatDropDown.ClearOptions();
+        var options = Enum.GetNames(typeof(ERepeatType)).ToList();
+        RepeatDropDown.AddOptions(options);
+        RepeatDropDown.RefreshShownValue();
+        RepeatDropDown.onValueChanged.AddListener(OnRepeatChanged);
+    }
+
+    private void OnRepeatChanged(int value)
+    {
+        BudgetModel.Repeat = (ERepeatType)value;
+        _accountController.Save();
+    }
+
+    private void OnEndInputSelected(string text)
+    {
+        EndInputField.text = BudgetModel.EndTime.ToShortDateString();
+    }
+
+    private void OnEndDateSubmit(string text)
+    {
+        BudgetModel.EndTime = DateTime.Parse(text);
+        _accountController.Save();
+        RefreshUI();
     }
 
     private void OnBudgetValueChanged(string text)
@@ -65,9 +92,11 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         var sum = expenses.Sum(x => x.Cost);
 
         RemainingLabel.text = $"${BudgetModel.Amount - sum}";
-        EndLabel.text = $"In {BudgetModel.RemainingDisplayDays} days";
+        EndInputField.text = $"In {BudgetModel.RemainingDisplayDays} days";
 
         SpentLabel.text = $"${sum}";
+
+        RepeatDropDown.SetValueWithoutNotify((int)BudgetModel.Repeat);
     }
 
     public void Bind(AccountController data)
