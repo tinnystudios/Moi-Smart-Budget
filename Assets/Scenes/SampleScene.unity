@@ -1870,6 +1870,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost
       objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4921713595381997834, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2099,26 +2119,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
@@ -2385,6 +2385,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Budget
       objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4921713595381997834, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2614,26 +2634,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
@@ -3541,6 +3541,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Name
       objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4921713595381997834, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3771,11 +3791,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3880,6 +3895,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: End
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4921713595381997834, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
@@ -4111,26 +4146,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_Enabled
@@ -4247,6 +4262,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4921713595381997834, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
@@ -4478,26 +4513,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_Enabled
@@ -4684,6 +4699,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EndDate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: In 5 Days
       objectReference: {fileID: 0}
     - target: {fileID: 7601250208239836041, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
@@ -4894,11 +4914,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: In 5 Days
       objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
@@ -5166,7 +5181,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1039722112}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7054,6 +7069,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spent
       objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: $50
+      objectReference: {fileID: 0}
     - target: {fileID: 4921713595381997834, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -7279,11 +7299,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 80
       objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: $50
-      objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -7434,7 +7449,7 @@ MonoBehaviour:
     Name: Budget Model
     Amount: 100
     Expenses: []
-    Repeat: 0
+    RepeatType: 0
   ExpenseButtonPrefab: {fileID: 448830852647868290, guid: 7b2e08f5b76a3e64e8b612bc13c4b426,
     type: 3}
   Container: {fileID: 1663522449}
@@ -8132,6 +8147,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Remaining
       objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: $50
+      objectReference: {fileID: 0}
     - target: {fileID: 7601250208239836041, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8336,11 +8356,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: $50
       objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
@@ -9084,6 +9099,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Name
       objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4921713595381997834, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -9314,11 +9349,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -9457,7 +9487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00006624423}
+  m_AnchoredPosition: {x: 0, y: -0.000011578049}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1663522450
@@ -9856,7 +9886,8 @@ MonoBehaviour:
     - Name: Cat's Treat
       Cost: 15
       BudgetId: 0
-    Repeat: 0
+      UserId: 0
+    RepeatType: 0
   - Id: 0
     Name: Grocery's Budget
     Amount: 200
@@ -9864,10 +9895,12 @@ MonoBehaviour:
     - Name: Steak
       Cost: 20
       BudgetId: 0
+      UserId: 0
     - Name: Big Breakfast
       Cost: 10
       BudgetId: 0
-    Repeat: 0
+      UserId: 0
+    RepeatType: 0
   BudgetHistory: []
 --- !u!4 &1747810785
 Transform:
@@ -11790,6 +11823,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Budget
       objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_Text
+      value: $100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7601250208239836041, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11989,26 +12042,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_Text
-      value: $100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601250208043732156, guid: 8a04fca8ccfd7424c9f6f96005036068,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7601250208097316035, guid: 8a04fca8ccfd7424c9f6f96005036068,
         type: 3}
