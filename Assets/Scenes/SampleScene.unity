@@ -10214,6 +10214,26 @@ PrefabInstance:
       propertyPath: m_text
       value: Header
       objectReference: {fileID: 0}
+    - target: {fileID: 8050015561107990766, guid: 5047c25d4781d8042b137b317b358efb,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.6774653
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050015561107990766, guid: 5047c25d4781d8042b137b317b358efb,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.747467
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050015561107990766, guid: 5047c25d4781d8042b137b317b358efb,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.8301887
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050015561107990766, guid: 5047c25d4781d8042b137b317b358efb,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4292066988
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5047c25d4781d8042b137b317b358efb, type: 3}
 --- !u!224 &1976095593 stripped
