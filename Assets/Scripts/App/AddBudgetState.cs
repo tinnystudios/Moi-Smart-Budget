@@ -58,9 +58,9 @@ public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateSt
             {
                 Name = NameInput.text,
                 Amount = float.Parse(BudgetInput.text),
-                StartTime = startTime,
+                StartDate = startTime,
                 RepeatType = repeatType,
-                EndTime = endTime,
+                EndDate = endTime,
             };
 
             // TODO 

@@ -10,11 +10,11 @@ public class BudgetModel
     public float Amount = 100;
     public List<ExpenseModel> Expenses = new List<ExpenseModel>();
 
-    public DateTime StartTime;
-    public DateTime EndTime;
+    public DateTime StartDate;
+    public DateTime EndDate;
     public ERepeatType RepeatType;
 
-    public double RemainingDays => (EndTime - DateTime.Now).TotalDays;
+    public double RemainingDays => (EndDate - DateTime.Now).TotalDays;
     public int RemainingDisplayDays => (int)RemainingDays;
         
     public float Spent => Expenses.Sum(x => x.Cost);
@@ -28,8 +28,8 @@ public class BudgetModel
     {
         Id = budgetModel.Id;
         Amount = budgetModel.Amount;
-        StartTime = budgetModel.StartTime;
-        EndTime = budgetModel.EndTime;
+        StartDate = budgetModel.StartDate;
+        EndDate = budgetModel.EndDate;
         RepeatType = budgetModel.RepeatType;
     }
 
@@ -43,16 +43,16 @@ public class BudgetModel
 
     public void NewCycle()
     {
-        StartTime = EndTime;
-        EndTime = StartTime.Add(TimeSpan.FromDays(RepeatDaysLookUp[RepeatType]));
+        StartDate = EndDate;
+        EndDate = StartDate.Add(TimeSpan.FromDays(RepeatDaysLookUp[RepeatType]));
     }
 
     public bool IsDifferentFrom(BudgetModel model)
     {
         return Id != model.Id ||
                Amount != model.Amount || 
-               StartTime != model.StartTime || 
-               EndTime != model.EndTime ||
+               StartDate != model.StartDate || 
+               EndDate != model.EndDate ||
                RepeatType != model.RepeatType;
     }
 }

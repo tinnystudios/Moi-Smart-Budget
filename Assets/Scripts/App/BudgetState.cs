@@ -76,7 +76,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     private void OnEndInputSelected(string text)
     {
-        EndInputField.text = BudgetModel.EndTime.ToShortDateString();
+        EndInputField.text = BudgetModel.EndDate.ToShortDateString();
     }
 
     private void OnRepeatChanged(int value)
@@ -86,7 +86,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     private void OnEndDateSubmit(string text)
     {
-        BudgetModel.EndTime = DateTime.Parse(text);
+        BudgetModel.EndDate = DateTime.Parse(text);
         RefreshUI();
     }
 
