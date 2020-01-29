@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Globalization;
 using System.Linq;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public class Server : MonoBehaviour
@@ -41,19 +40,26 @@ public class Server : MonoBehaviour
 
     public IEnumerator PostExpense(ExpenseModel expense)
     {
-        yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
+        if (Offline)
+            ResourceManager.CacheUnsent(expense, $"expense-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
+        else
+            yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
     }
 
     public IEnumerator PostBudget(BudgetModel budget)
     {
-        yield return RestService.Post(GetApiUrl(ServerPaths.AddBudgets), budget);
+        if (Offline)
+            ResourceManager.CacheUnsent(budget, $"budget-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
+        else
+            yield return RestService.Post(GetApiUrl(ServerPaths.AddBudgets), budget);
     }
 
     public IEnumerator HealthCheck()
     {
-        yield return RestService.Get<List<ExpenseResponse>>(GetApiUrl(ServerPaths.GetExpenses), 
-            (resp) => Online = true,
-            (error) => Online = false);
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+            Online = false;
+        else
+            yield return RestService.Get<List<ExpenseResponse>>(GetApiUrl(ServerPaths.GetExpenses), (resp) => Online = true, (error) => Online = false);
     }
 
     public IEnumerator GetExpenses()
@@ -61,7 +67,7 @@ public class Server : MonoBehaviour
         if (Offline)
             ExpensesResponse = ResourceManager.Get<ExpenseResponse>("expenses.json"); 
         else
-            yield return RestService.Get(GetApiUrl(ServerPaths.GetExpenses), ExpensesResponse, (resp) => ResourceManager.Cache(ExpensesResponse, "expenses.json"));
+            yield return RestService.Get(GetApiUrl(ServerPaths.GetExpenses), ExpensesResponse, (resp) => ResourceManager.CacheResource(ExpensesResponse, "expenses.json"));
 
         RefreshBudgetExpenseList();
     }
@@ -71,7 +77,7 @@ public class Server : MonoBehaviour
         if (Offline)
             BudgetsResponse = ResourceManager.Get<BudgetResponse>("budgets.json");
         else
-            yield return RestService.Get(GetApiUrl(ServerPaths.GetBudgets), BudgetsResponse, (resp) => ResourceManager.Cache(BudgetsResponse, "budgets.json"));
+            yield return RestService.Get(GetApiUrl(ServerPaths.GetBudgets), BudgetsResponse, (resp) => ResourceManager.CacheResource(BudgetsResponse, "budgets.json"));
 
         RefreshBudgetExpenseList();
     }
@@ -91,42 +97,4 @@ public class Server : MonoBehaviour
     {
         return $"{HostName}/{api}";
     }
-
-}
-
-public class ResourceManager
-{
-    public string CachePath;
-
-    public void Initialize()
-    {
-        CachePath = $"{Application.persistentDataPath}/Resources";
-
-        if (!Directory.Exists(CachePath))
-            Directory.CreateDirectory(CachePath);
-    }
-
-    public void Cache(object obj, string fileName)
-    {
-        var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-        Cache(json, fileName);
-    }
-
-    public void Cache(string json, string fileName)
-    {
-        File.WriteAllText(FullPath(fileName), json);
-    }
-
-    public bool HasCache(string fileName)
-    {
-        return File.Exists(FullPath(fileName));
-    }
-
-    public T Get<T>(string fileName)
-    {
-        var json = File.ReadAllText(FullPath(fileName));
-        return JsonConvert.DeserializeObject<T>(json);
-    }
-
-    public string FullPath(string fileName) => $"{CachePath}/{fileName}";
 }
