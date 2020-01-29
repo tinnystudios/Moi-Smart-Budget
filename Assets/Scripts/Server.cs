@@ -22,6 +22,7 @@ public class Server : MonoBehaviour
     public bool Online { get; private set; }
 
     public bool Running => RestService.Running;
+    public string Now => DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace("/", "-").Replace(" ", "-").Replace(":", "-");
 
     private IEnumerator Start()
     {
@@ -59,7 +60,7 @@ public class Server : MonoBehaviour
         if (Offline)
         {
             // For the server to upload
-            ResourceManager.CacheUnsent(expense, $"expense-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
+            ResourceManager.CacheUnsent(expense, $"expense-{Now}.json");
 
             // The current local app need to also cache it again
             ExpensesResponse.Result.Add(expense);
@@ -69,11 +70,16 @@ public class Server : MonoBehaviour
             yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
     }
 
+    /// <summary>
+    /// Making a new budget
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator PostBudget(BudgetModel budget)
     {
         if (Offline)
         {
-            ResourceManager.CacheUnsent(budget, $"budget-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
+            ResourceManager.CacheUnsent(budget, $"budget-{Now}.json");
+            budget.Id = BudgetsResponse.Result.Count + 1;
             ResourceManager.CacheResource(BudgetsResponse, "budgets.json");
         }
         else
