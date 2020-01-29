@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class BudgetModel
@@ -15,6 +16,9 @@ public class BudgetModel
 
     public double RemainingDays => (EndTime - DateTime.Now).TotalDays;
     public int RemainingDisplayDays => (int)RemainingDays;
+        
+    public float Spent => Expenses.Sum(x => x.Cost);
+    public float RemainingBudget => Amount - Spent;
 
     public BudgetModel()
     {

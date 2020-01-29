@@ -4,11 +4,13 @@ public class BudgetButton : Button
 {
     public BudgetModel Model;
 
-    public TextMeshProUGUI Label;
+    public TextMeshProUGUI NameLabel;
+    public TextMeshProUGUI RemainingLabel;
 
     public void Initialize(BudgetModel budget)
     {
         Model = budget;
-        Label.text = budget.Name;
+        NameLabel.text = budget.Name;
+        RemainingLabel.text = $"${budget.RemainingBudget}";
     }
 }
