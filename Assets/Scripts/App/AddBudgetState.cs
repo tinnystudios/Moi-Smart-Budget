@@ -63,11 +63,12 @@ public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateSt
                 EndTime = endTime,
             };
 
+            // TODO 
+            _accountController.Add(budget);
             _spinner.Begin();
             yield return _server.PostBudget(budget);
             _spinner.End();
 
-            _accountController.Add(budget);
             StateMachine.Back();
         }
     }

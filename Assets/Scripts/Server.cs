@@ -48,20 +48,26 @@ public class Server : MonoBehaviour
 
     public IEnumerator PostExpense(ExpenseModel expense)
     {
-        // TODO The local data need to be updated.
-
         if (Offline)
+        {
+            // For the server to upload
             ResourceManager.CacheUnsent(expense, $"expense-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
+
+            // The current local app need to also cache it again
+            ExpensesResponse.Result.Add(expense);
+            ResourceManager.CacheResource(ExpensesResponse, "expenses.json");
+        }
         else
             yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
     }
 
     public IEnumerator PostBudget(BudgetModel budget)
     {
-        // TODO The local data need to be updated.
-
         if (Offline)
+        {
             ResourceManager.CacheUnsent(budget, $"budget-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
+            ResourceManager.CacheResource(BudgetsResponse, "budgets.json");
+        }
         else
             yield return RestService.Post(GetApiUrl(ServerPaths.AddBudgets), budget);
     }
