@@ -41,6 +41,13 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     public override IEnumerator TransitionIn(State state)
     {
+        if (AppSettings.AutoRefresh)
+        {
+            _spinner.Begin();
+            yield return _server.GetExpenses();
+            _spinner.End();
+        }
+
         _initialBudgetModel = new BudgetModel(BudgetModel);
 
         if (BudgetModel.RemainingDays <= 0 && BudgetModel.Repeat != ERepeatType.Once)
@@ -58,7 +65,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
             expenseButton.Initialize(expense);
         }
 
-        return base.TransitionIn(state);
+        yield return base.TransitionIn(state);
     }
 
     public override IEnumerator TransitionOut(State state)
@@ -154,4 +161,9 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     public void Bind(DialogueBox data) => _dialogueBox = data;
     public void Bind(Server data) => _server = data;
     public void Bind(Spinner data) => _spinner = data;
+}
+
+public static class AppSettings
+{
+    public static bool AutoRefresh = true;
 }

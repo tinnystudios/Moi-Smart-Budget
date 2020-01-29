@@ -35,6 +35,8 @@ public class StateMachine : MonoBehaviour
         if (state == Current)
             yield break;
 
+        // TODO Run Pre State Scripts
+
         if (Current != null)
         {
             yield return Current.TransitionOut(state);
@@ -42,6 +44,8 @@ public class StateMachine : MonoBehaviour
         }
 
         yield return state.TransitionIn(Current);
+
+        // TODO Run Post State Scripts
 
         Current = state;
         OnStateEntered?.Invoke(Current);

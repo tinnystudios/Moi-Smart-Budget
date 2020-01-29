@@ -28,12 +28,12 @@ public class RestService
         Running = false;
     }
 
-    public IEnumerator Get<T>(string url, Response<T> obj, Action<string> OnError = null)
+    public IEnumerator Get<T>(string url, Response<T> obj, Action<T> onSuccess = null, Action<string> onError = null)
     {
-        yield return Get<T>(url, (resp) => obj.Result = resp);
+        yield return Get<T>(url, (resp) => { obj.Result = resp; onSuccess?.Invoke(resp);});
     }
 
-    public IEnumerator Get<T>(string url, Action<T> OnSuccess, Action<string> OnError = null)
+    public IEnumerator Get<T>(string url, Action<T> onSuccess, Action<string> onError = null)
     {
         Running = true;
 
@@ -47,7 +47,7 @@ public class RestService
         {
             Debug.Log("Response: " + www.downloadHandler.text);
             var obj = JsonConvert.DeserializeObject<T>(www.downloadHandler.text);
-            OnSuccess?.Invoke(obj);
+            onSuccess?.Invoke(obj);
         }
 
         Running = false;
