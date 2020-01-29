@@ -5,8 +5,9 @@ public class MenuState : State, IDataBind<TitleComponent>
 {
     public CanvasGroup CanvasGroup;
     public string Title = "Untitled";
+    public bool Interactable;
 
-    private TitleComponent _titleComponent;
+    protected TitleComponent _titleComponent;
 
     public override void Setup()
     {
@@ -15,7 +16,7 @@ public class MenuState : State, IDataBind<TitleComponent>
 
     public override IEnumerator TransitionIn(State state)
     {
-        _titleComponent.SetTitle(Title);
+        _titleComponent.SetTitle(Title, Interactable);
         SetVisibility(true);
         yield break;
     }

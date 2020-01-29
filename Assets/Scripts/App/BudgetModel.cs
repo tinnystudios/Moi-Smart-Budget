@@ -26,6 +26,7 @@ public class BudgetModel
 
     public BudgetModel(BudgetModel budgetModel)
     {
+        Name = budgetModel.Name;
         Id = budgetModel.Id;
         Amount = budgetModel.Amount;
         StartDate = budgetModel.StartDate;
@@ -53,6 +54,7 @@ public class BudgetModel
                Amount != model.Amount || 
                StartDate != model.StartDate || 
                EndDate != model.EndDate ||
-               RepeatType != model.RepeatType;
+               RepeatType != model.RepeatType ||
+               Name != model.Name;
     }
 }

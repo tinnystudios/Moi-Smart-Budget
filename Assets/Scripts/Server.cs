@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Server : MonoBehaviour
 {
@@ -38,6 +39,13 @@ public class Server : MonoBehaviour
         yield return GetBudgets();
     }
 
+    public void Refresh()
+    {
+        SceneManager.LoadScene(0);
+
+        // At the moment, I've chosen to reload the entire scene as reloading data also re-creating the visuals.
+    }
+
     public IEnumerator HealthCheck()
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
@@ -69,7 +77,11 @@ public class Server : MonoBehaviour
             ResourceManager.CacheResource(BudgetsResponse, "budgets.json");
         }
         else
+        {
             yield return RestService.Post(GetApiUrl(ServerPaths.AddBudgets), budget);
+            yield return GetBudgets();
+            UnityEngine.GameObject.FindObjectOfType<AccountController>().Load(BudgetsResponse.Result);
+        }
     }
 
     public IEnumerator GetExpenses()

@@ -29,8 +29,13 @@ public class AddBudgetState : MenuState, IDataBind<AccountController>, ICreateSt
     {
         StartDateInput.text = DateTime.Now.ToShortDateString();
         EndDateInput.text = DateTime.Now.AddDays(7).ToShortDateString();
-
+       
         return base.TransitionIn(state);
+    }
+
+    private void OnTitleValueChanged(string text)
+    {
+        
     }
 
     public void Bind(AccountController data)

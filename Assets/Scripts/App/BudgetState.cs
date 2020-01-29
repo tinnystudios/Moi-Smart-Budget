@@ -41,12 +41,14 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     public override IEnumerator TransitionIn(State state)
     {
+        /*
         if (AppSettings.AutoRefresh)
         {
             _spinner.Begin();
             yield return _server.GetExpenses();
             _spinner.End();
         }
+        */
 
         _initialBudgetModel = new BudgetModel(BudgetModel);
 
@@ -66,12 +68,20 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         }
 
         yield return base.TransitionIn(state);
+
+        _titleComponent.InputField.onValueChanged.AddListener(OnTitleValueChanged);
+    }
+
+    private void OnTitleValueChanged(string text)
+    {
+        BudgetModel.Name = text;
     }
 
     public override IEnumerator TransitionOut(State state)
     {
         yield return SaveChanges();
         yield return base.TransitionOut(state);
+        _titleComponent.InputField.onValueChanged.RemoveListener(OnTitleValueChanged);
     }
 
     private void OnEndInputSelected(string text)
