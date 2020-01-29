@@ -22,6 +22,10 @@ public class AccountController : MonoBehaviour, IDataBind<StateMachine>
 
         budgetModel.Expenses.Clear();
         budgetModel.NewCycle();
+
+        // Update BudgetModel
+        // Call Clear Expenses
+        // Reload scene
     }
 
     public void AddHistory(BudgetModel budgetModel)
