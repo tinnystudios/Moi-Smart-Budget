@@ -25,6 +25,8 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     private Server _server;
     private Spinner _spinner;
 
+    private BudgetModel _initialBudgetModel;
+
     public override void Setup()
     {
         base.Setup();
@@ -41,6 +43,8 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     public override IEnumerator TransitionIn(State state)
     {
+        _initialBudgetModel = new BudgetModel(BudgetModel);
+
         if (BudgetModel.RemainingDays <= 0 && BudgetModel.Repeat != ERepeatType.Once)
             _accountController.NewBudgetCycle(BudgetModel);
 
@@ -65,14 +69,14 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
         yield return base.TransitionOut(state);
     }
 
-    private void OnRepeatChanged(int value)
-    {
-        BudgetModel.Repeat = (ERepeatType)value;
-    }
-
     private void OnEndInputSelected(string text)
     {
         EndInputField.text = BudgetModel.EndTime.ToShortDateString();
+    }
+
+    private void OnRepeatChanged(int value)
+    {
+        BudgetModel.Repeat = (ERepeatType)value;
     }
 
     private void OnEndDateSubmit(string text)
@@ -89,7 +93,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     public Coroutine SaveChanges()
     {
-        if (_server.Running)
+        if (_server.Running || !_initialBudgetModel.IsDifferentFrom(BudgetModel))
             return null;
 
         return StartCoroutine(Routine());
