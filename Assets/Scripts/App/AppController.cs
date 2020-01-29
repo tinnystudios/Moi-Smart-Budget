@@ -17,6 +17,7 @@ public class AppController : MonoBehaviour, IDataBind<Server>, IDataBind<Spinner
         this.Bind<IDataBind<DialogueBox>, DialogueBox>();
         this.Bind<IDataBind<Server>, Server>();
         this.Bind<IDataBind<Spinner>, Spinner>();
+        this.Bind<IDataBind<TitleComponent>, TitleComponent>();
     }
 
     private IEnumerator Start()

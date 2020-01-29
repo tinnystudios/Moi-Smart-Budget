@@ -11,8 +11,6 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
     public ExpenseButton ExpenseButtonPrefab;
     public Transform Container;
 
-    public TextMeshProUGUI TitleLabel;
-
     public TMP_InputField BudgetInputField;
     public TMP_InputField EndInputField;
     public TextMeshProUGUI RemainingLabel;
@@ -108,7 +106,8 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     public void RefreshUI()
     {
-        TitleLabel.text = BudgetModel.Name;
+        Title = BudgetModel.Name;
+
         BudgetInputField.text = $"{BudgetModel.Amount}";
 
         var expenses = BudgetModel.Expenses;

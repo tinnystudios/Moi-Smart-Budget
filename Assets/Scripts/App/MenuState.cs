@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MenuState : State
+public class MenuState : State, IDataBind<TitleComponent>
 {
     public CanvasGroup CanvasGroup;
+    public string Title = "Untitled";
+
+    private TitleComponent _titleComponent;
 
     public override void Setup()
     {
@@ -12,6 +15,7 @@ public class MenuState : State
 
     public override IEnumerator TransitionIn(State state)
     {
+        _titleComponent.SetTitle(Title);
         SetVisibility(true);
         yield break;
     }
@@ -28,5 +32,10 @@ public class MenuState : State
         CanvasGroup.interactable = active;
         CanvasGroup.blocksRaycasts = active;
         CanvasGroup.gameObject.SetActive(active);
+    }
+
+    public void Bind(TitleComponent data)
+    {
+        _titleComponent = data;
     }
 }
