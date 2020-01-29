@@ -23,7 +23,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO expenses (name, budgetId, cost)
+$sql = "INSERT INTO expenses (name, budgetId, cost, purchaseDate, userId)
 VALUES ('".$Name."', '".$BudgetId."', '".$Cost."', '".$PurchaseDate."', '".$UserId."')";
 
 if ($conn->query($sql) === TRUE) {

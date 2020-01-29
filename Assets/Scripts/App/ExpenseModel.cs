@@ -8,6 +8,7 @@ public class ExpenseModel
     public int BudgetId;
 
     public DateTime PurchaseDate = DateTime.Now;
+    public int UserId;
 
     public ExpenseModel() { }
 }

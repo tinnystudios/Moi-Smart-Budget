@@ -13,7 +13,7 @@ $Name = $obj->Name;
 $Amount = $obj->Amount;
 $StartDate = $obj->StartDate;
 $EndDate = $obj->EndDate;
-$Repeat = $obj->Repeat;
+$RepeatType = $obj->RepeatType;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -22,8 +22,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO budgets (name, amount)
-VALUES ('".$Name."', '".$Amount."', '".$StartDate."', '".$EndDate."', '".$Repeat."')";
+$sql = "INSERT INTO budgets (name, amount, startDate, endDate, repeatType)
+VALUES ('".$Name."', '".$Amount."', '".$StartDate."', '".$EndDate."', '".$RepeatType."')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

@@ -12,7 +12,7 @@ public class BudgetModel
 
     public DateTime StartTime;
     public DateTime EndTime;
-    public ERepeatType Repeat;
+    public ERepeatType RepeatType;
 
     public double RemainingDays => (EndTime - DateTime.Now).TotalDays;
     public int RemainingDisplayDays => (int)RemainingDays;
@@ -30,7 +30,7 @@ public class BudgetModel
         Amount = budgetModel.Amount;
         StartTime = budgetModel.StartTime;
         EndTime = budgetModel.EndTime;
-        Repeat = budgetModel.Repeat;
+        RepeatType = budgetModel.RepeatType;
     }
 
     public static Dictionary<ERepeatType, int> RepeatDaysLookUp = new Dictionary<ERepeatType, int>
@@ -44,7 +44,7 @@ public class BudgetModel
     public void NewCycle()
     {
         StartTime = EndTime;
-        EndTime = StartTime.Add(TimeSpan.FromDays(RepeatDaysLookUp[Repeat]));
+        EndTime = StartTime.Add(TimeSpan.FromDays(RepeatDaysLookUp[RepeatType]));
     }
 
     public bool IsDifferentFrom(BudgetModel model)
@@ -53,6 +53,6 @@ public class BudgetModel
                Amount != model.Amount || 
                StartTime != model.StartTime || 
                EndTime != model.EndTime ||
-               Repeat != model.Repeat;
+               RepeatType != model.RepeatType;
     }
 }

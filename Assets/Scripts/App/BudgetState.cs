@@ -50,7 +50,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
         _initialBudgetModel = new BudgetModel(BudgetModel);
 
-        if (BudgetModel.RemainingDays <= 0 && BudgetModel.Repeat != ERepeatType.Once)
+        if (BudgetModel.RemainingDays <= 0 && BudgetModel.RepeatType != ERepeatType.Once)
             _accountController.NewBudgetCycle(BudgetModel);
 
         RefreshUI();
@@ -81,7 +81,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
     private void OnRepeatChanged(int value)
     {
-        BudgetModel.Repeat = (ERepeatType)value;
+        BudgetModel.RepeatType = (ERepeatType)value;
     }
 
     private void OnEndDateSubmit(string text)
@@ -125,7 +125,7 @@ public class BudgetState : MenuState, IDataBind<AccountController>, IDataBind<Ad
 
         SpentLabel.text = $"${sum}";
 
-        RepeatDropDown.SetValueWithoutNotify((int)BudgetModel.Repeat);
+        RepeatDropDown.SetValueWithoutNotify((int)BudgetModel.RepeatType);
     }
 
     public void Bind(AccountController data)

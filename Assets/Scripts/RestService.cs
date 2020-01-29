@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -46,6 +47,13 @@ public class RestService
         else
         {
             Debug.Log("Response: " + www.downloadHandler.text);
+
+            var settings = new JsonSerializerSettings
+            {
+                DateFormatString = "yyyy-MM-dd mm:ss.fffK",
+                DateTimeZoneHandling = DateTimeZoneHandling.Local
+            };
+
             var obj = JsonConvert.DeserializeObject<T>(www.downloadHandler.text);
             onSuccess?.Invoke(obj);
         }
