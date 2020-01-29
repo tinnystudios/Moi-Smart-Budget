@@ -38,8 +38,18 @@ public class Server : MonoBehaviour
         yield return GetBudgets();
     }
 
+    public IEnumerator HealthCheck()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+            Online = false;
+        else
+            yield return RestService.Get<List<ExpenseResponse>>(GetApiUrl(ServerPaths.GetExpenses), (resp) => Online = true, (error) => Online = false);
+    }
+
     public IEnumerator PostExpense(ExpenseModel expense)
     {
+        // TODO The local data need to be updated.
+
         if (Offline)
             ResourceManager.CacheUnsent(expense, $"expense-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
         else
@@ -48,18 +58,12 @@ public class Server : MonoBehaviour
 
     public IEnumerator PostBudget(BudgetModel budget)
     {
+        // TODO The local data need to be updated.
+
         if (Offline)
             ResourceManager.CacheUnsent(budget, $"budget-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}.json");
         else
             yield return RestService.Post(GetApiUrl(ServerPaths.AddBudgets), budget);
-    }
-
-    public IEnumerator HealthCheck()
-    {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
-            Online = false;
-        else
-            yield return RestService.Get<List<ExpenseResponse>>(GetApiUrl(ServerPaths.GetExpenses), (resp) => Online = true, (error) => Online = false);
     }
 
     public IEnumerator GetExpenses()
