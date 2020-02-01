@@ -10,7 +10,7 @@ public class Server : MonoBehaviour
 {
     public ResourceManager ResourceManager = new ResourceManager();
 
-    public const string HostName = "http://moi.holepunch.io";
+    public const string HostName = "http://13.211.83.187:3000";
 
     public RestService RestService = new RestService();
     public ExpenseResponse ExpensesResponse;
