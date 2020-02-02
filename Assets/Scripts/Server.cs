@@ -26,10 +26,27 @@ public class Server : MonoBehaviour
 
     private IEnumerator Start()
     {
-        if (!AutoStart)
-            yield break;
-
+        /*
+        yield return HealthCheck();
         yield return UpdateDataContext();
+
+        foreach (var budget in BudgetsResponse.Result)
+        {
+            if (budget.RemainingDays <= 1)
+            {
+                foreach (var expense in budget.Expenses)
+                {
+                    yield return PostHistory(expense);
+                    yield return DeleteExpense(expense);
+                }
+            }
+        }
+
+        //if (!AutoStart)
+        //    yield break;
+
+        //yield return UpdateDataContext();
+        */
     }
 
     public IEnumerator UpdateDataContext()
@@ -68,6 +85,16 @@ public class Server : MonoBehaviour
         }
         else
             yield return RestService.Post(GetApiUrl(ServerPaths.AddExpenses), expense);
+    }
+
+    public IEnumerator PostHistory(ExpenseModel expense)
+    {
+        yield return RestService.Post(GetApiUrl(ServerPaths.AddHistories), expense);
+    }
+
+    public IEnumerator DeleteExpense(ExpenseModel expense)
+    {
+        yield return RestService.Post(GetApiUrl(ServerPaths.DeleteExpense), expense);
     }
 
     /// <summary>
