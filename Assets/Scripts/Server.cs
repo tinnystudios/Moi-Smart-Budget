@@ -26,27 +26,21 @@ public class Server : MonoBehaviour
 
     private IEnumerator Start()
     {
-        /*
-        yield return HealthCheck();
+        StartCoroutine(HealthIntervalCheck());
+
+        if (!AutoStart)
+            yield break;
+
         yield return UpdateDataContext();
+    }
 
-        foreach (var budget in BudgetsResponse.Result)
+    private IEnumerator HealthIntervalCheck()
+    {
+        while (true)
         {
-            if (budget.RemainingDays <= 1)
-            {
-                foreach (var expense in budget.Expenses)
-                {
-                    yield return PostHistory(expense);
-                    yield return DeleteExpense(expense);
-                }
-            }
+            yield return new WaitForSeconds(2);
+            yield return HealthCheck();
         }
-
-        //if (!AutoStart)
-        //    yield break;
-
-        //yield return UpdateDataContext();
-        */
     }
 
     public IEnumerator UpdateDataContext()
@@ -55,12 +49,38 @@ public class Server : MonoBehaviour
         yield return HealthCheck();
         yield return GetExpenses();
         yield return GetBudgets();
+        yield return UpdateOutOfDateBudgets();
+    }
+
+    public IEnumerator UpdateOutOfDateBudgets()
+    {
+        bool has = false;
+        foreach (var budget in BudgetsResponse.Result)
+        {
+            if (budget.RemainingDays <= 1 && budget.RepeatType != ERepeatType.Once)
+            {
+                foreach (var expense in budget.Expenses)
+                {
+                    yield return PostHistory(expense);
+                    yield return DeleteExpense(expense);
+                    has = true;
+                }
+
+                budget.NewCycle();
+                yield return UpdateBudget(budget);
+            }
+        }
+
+        if (has)
+        {
+            yield return GetExpenses();
+            yield return GetBudgets();
+        }
     }
 
     public void Refresh()
     {
         SceneManager.LoadScene(0);
-
         // At the moment, I've chosen to reload the entire scene as reloading data also re-creating the visuals.
     }
 
@@ -69,7 +89,12 @@ public class Server : MonoBehaviour
         if (Application.internetReachability == NetworkReachability.NotReachable)
             Online = false;
         else
-            yield return RestService.Get<List<ExpenseResponse>>(GetApiUrl(ServerPaths.GetExpenses), (resp) => Online = true, (error) => Online = false);
+            yield return RestService.Get<HealthResponse>(GetApiUrl(ServerPaths.GetHealth), (resp) => Online = true, (error) => Online = false);
+    }
+
+    public class HealthResponse
+    {
+        public string Status;
     }
 
     public IEnumerator PostExpense(ExpenseModel expense)
@@ -120,9 +145,17 @@ public class Server : MonoBehaviour
     public IEnumerator GetExpenses()
     {
         if (Offline)
-            ExpensesResponse = ResourceManager.Get<ExpenseResponse>("expenses.json"); 
+            ExpensesResponse = ResourceManager.Get<ExpenseResponse>("expenses.json");
         else
-            yield return RestService.Get(GetApiUrl(ServerPaths.GetExpenses), ExpensesResponse, (resp) => ResourceManager.CacheResource(ExpensesResponse, "expenses.json"));
+        {
+            yield return RestService.Get(GetApiUrl(ServerPaths.GetExpenses), ExpensesResponse, (resp) =>
+            {
+                if (ExpensesResponse?.Result == null)
+                    ExpensesResponse = new ExpenseResponse() {Result = new List<ExpenseModel>()};
+
+                ResourceManager.CacheResource(ExpensesResponse, "expenses.json");
+            });
+        }
 
         RefreshBudgetExpenseList();
     }

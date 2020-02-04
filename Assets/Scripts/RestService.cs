@@ -34,7 +34,7 @@ public class RestService
         yield return Get<T>(url, (resp) => { obj.Result = resp; onSuccess?.Invoke(resp);});
     }
 
-    public IEnumerator Get<T>(string url, Action<T> onSuccess, Action<string> onError = null)
+    public IEnumerator Get<T>(string url, Action<T> onSuccess, Action<string> onError = null, bool convert = true)
     {
         Running = true;
 
